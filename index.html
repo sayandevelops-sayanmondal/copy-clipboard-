@@ -73,20 +73,36 @@
     <p id="message"></p>
 
 <script>
+// copyText() ফাংশনটি এমনভাবে তৈরি করা হয়েছে যাতে একটি ইনপুট ফিল্ড থেকে টেক্সট কপি করা যায়
 function copyText() {
+    // প্রথমে ইনপুট ফিল্ডটি DOM থেকে ধরে নিচ্ছি (id="copytext")
     const text = document.getElementById("copytext");
    
-    if(text.value.trim() != ''){
-        text.select(); // ইনপুট ফিল্ডের টেক্সট সিলেক্ট করা হচ্ছে
-    document.execCommand("copy"); // সেই টেক্সট ক্লিপবোর্ডে কপি করা হচ্ছে
-    document.getElementById('message').textContent = "Text Copied to Clipboard "
- document.getElementById('message').style.color = "green"
-    }else{
-        document.getElementById('message').textContent = "Write somthing"
-document.getElementById('message').style.color = "red"
-    }
+    // চেক করা হচ্ছে ইনপুট ফিল্ডটি খালি আছে কিনা 
+    // যদি ইনপুট ফিল্ডে কোনো লেখা থাকে (trim() দিয়ে আগে-পিছে ফাকা স্পেস বাদ দেওয়া হয়েছে)
+    if (text.value.trim() != '') {
+        // ইনপুট ফিল্ডের মধ্যে থাকা লেখা পুরোপুরি সিলেক্ট করা হচ্ছে
+        text.select();
         
+        // সিলেক্ট করা লেখা clipboard এ কপি করা হচ্ছে
+        // এটি পুরোনো পদ্ধতি (deprecated), তবে এখনো অনেক browser-এ কাজ করে
+        document.execCommand("copy");
+
+        // কপি হয়ে গেলে ইউজারকে জানিয়ে দেওয়া হচ্ছে যে টেক্সট কপি হয়ে গেছে
+        document.getElementById('message').textContent = "Text Copied to Clipboard";
+        
+        // সেই মেসেজটি সবুজ রঙে দেখানো হচ্ছে, যেন ইউজার বুঝতে পারে এটি positive action
+        document.getElementById('message').style.color = "green";
+
+    } else {
+        // যদি ইনপুট ফিল্ডে কিছু না থাকে, ইউজারকে দেখানো হচ্ছে "Write somthing" মেসেজ
+        document.getElementById('message').textContent = "Write somthing";
+
+        // মেসেজটি লাল রঙে দেখানো হচ্ছে, যাতে বোঝা যায় alert বা warning দেওয়া হচ্ছে
+        document.getElementById('message').style.color = "red";
+    }
 }
+
 </script>
 </body>
 </html>
