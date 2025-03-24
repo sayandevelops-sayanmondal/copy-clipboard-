@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Clipboard</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        button {
+            margin-top: 1px;
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 15px 20px;
+            }
+            input[type="text"], button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="copytext" placeholder="write text to copy the clipboard">
+    <button onclick="copyText()">Copy</button>
+    <p id="message"></p>
+
+<script>
+function copyText() {
+    const text = document.getElementById("copytext");
+   
+    if(text.value.trim() != ''){
+        text.select(); // ইনপুট ফিল্ডের টেক্সট সিলেক্ট করা হচ্ছে
+    document.execCommand("copy"); // সেই টেক্সট ক্লিপবোর্ডে কপি করা হচ্ছে
+    document.getElementById('message').textContent = "Text Copied to Clipboard "
+ document.getElementById('message').style.color = "green"
+    }else{
+        document.getElementById('message').textContent = "Write somthing"
+document.getElementById('message').style.color = "red"
+    }
+        
+}
+</script>
+</body>
+</html>
